@@ -3,7 +3,7 @@ version: '3'
 services:
   botpress:
     build:
-      context: ./botpress
+      context: ./docker-compose/botpress
       dockerfile: Dockerfile
     image: botpress/server
     container_name: botpress-server
@@ -21,7 +21,7 @@ services:
 
   botpress_lang:
     build:
-      context: ./botpress
+      context: ./docker-compose/botpress
       dockerfile: Dockerfile
     image: botpress/server
     container_name: botpress-lang
@@ -34,7 +34,7 @@ services:
 
   botpress_duckling:
     build:
-      context: ./botpress
+      context: ./docker-compose/botpress
       dockerfile: Dockerfile
     image: botpress-duckling
     container_name: botpress-duckling
@@ -46,7 +46,7 @@ services:
   # connections between multiple botpress instances and NLU server cannot be load balanced
   botpress_nlu:
     build:
-      context: ./botpress
+      context: ./docker-compose/botpress
       dockerfile: Dockerfile
     image: botpress/server
     container_name: botpress-nlu
