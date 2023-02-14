@@ -17,6 +17,7 @@ services:
       - postgres
     volumes:
       - /home/docker/botpress/data:/botpress/data
+    privileged: true
 
   botpress_lang:
     build:
@@ -29,6 +30,7 @@ services:
       - 3100
     volumes:
       - /home/docker/botpress/language:/botpress/lang
+    privileged: true
 
   botpress_duckling:
     build:
@@ -39,6 +41,7 @@ services:
     command: ./duckling -p 8000
     expose:
       - 8000
+    privileged: true
   # Each instance of botpress must have its own NLU server
   # connections between multiple botpress instances and NLU server cannot be load balanced
   botpress_nlu:
@@ -53,6 +56,7 @@ services:
     depends_on:
       - botpress_duckling
       - botpress_lang
+    privileged: true
 
   postgres:
     image: postgres:11.2-alpine
@@ -66,6 +70,7 @@ services:
       POSTGRES_USER: postgres
     volumes:
       - /home/docker/pgdata:/var/lib/postgresql/data
+    privileged: true
 
   nginx:
     image: nginx:1.21
@@ -76,6 +81,4 @@ services:
       - botpress
     volumes:
       - /home/docker/nginx/nginx.conf:/etc/nginx/nginx.conf
-
-volumes:
-  pgdata:
+    privileged: true
