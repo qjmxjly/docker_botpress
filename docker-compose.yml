@@ -17,6 +17,7 @@ services:
       - postgres
     volumes:
       - /home/docker/botpress/data:/botpress/data
+    restart: always
     user: "0:0"
 
   botpress_lang:
@@ -30,6 +31,7 @@ services:
       - 3100
     volumes:
       - /home/docker/botpress/language:/botpress/lang
+    restart: always
     user: "0:0"
 
   botpress_duckling:
@@ -41,6 +43,7 @@ services:
     command: ./duckling -p 8000
     expose:
       - 8000
+    restart: always
     user: "0:0"
   # Each instance of botpress must have its own NLU server
   # connections between multiple botpress instances and NLU server cannot be load balanced
@@ -56,6 +59,7 @@ services:
     depends_on:
       - botpress_duckling
       - botpress_lang
+    restart: always
     user: "0:0"
 
   postgres:
@@ -70,6 +74,7 @@ services:
       POSTGRES_USER: postgres
     volumes:
       - /home/docker/pgdata:/var/lib/postgresql/data
+    restart: always
 
   nginx:
     image: nginx:1.21
